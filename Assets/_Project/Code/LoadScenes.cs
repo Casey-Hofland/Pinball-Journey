@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class LoadScenes : MonoBehaviour
 {
@@ -25,10 +26,8 @@ public class LoadScenes : MonoBehaviour
 
         foreach (var asyncOp in scenesLoading)
         {
-            while(!asyncOp.isDone)
-            {
+            while (asyncOp.progress + Mathf.Epsilon < 0.9f)
                 yield return null;
-            }
         }
 
         for (int i = 0; i < scenesLoading.Count; i++)
